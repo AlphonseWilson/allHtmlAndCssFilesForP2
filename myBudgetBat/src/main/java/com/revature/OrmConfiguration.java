@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement 
 public class OrmConfiguration {
+	
 		@Bean
 		public LocalSessionFactoryBean getSessionFactory() {
 			LocalSessionFactoryBean sf = new LocalSessionFactoryBean();
@@ -27,19 +28,22 @@ public class OrmConfiguration {
 			sf.setPackagesToScan("com.revature.beans");
 			sf.setHibernateProperties(getHibernateProps());
 			return sf;
+			
 		}
 		
 		@Bean
 		public DataSource getDataSource() {
+			System.out.println("DB_Driver: "+System.getenv("DB_Driver")+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
 			DriverManagerDataSource dsrc = new DriverManagerDataSource();
-			dsrc.setDriverClassName(System.getenv("DB_Driver"));
-			dsrc.setUrl(System.getenv("DB_URL"));
-			dsrc.setUsername(System.getenv("DB_Username"));
-			dsrc.setPassword(System.getenv("DB_Password"));
+			dsrc.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+			dsrc.setUrl("jdbc:oracle:thin:@databasedemo.cuzvuv7zoqan.us-east-2.rds.amazonaws.com:1521:ORCL");
+			dsrc.setUsername("AlphonseWilson");
+			dsrc.setPassword("Philip9798");
 			return dsrc;
 		}
 		
-		@Bean
+
 		public Properties getHibernateProps() {
 			Properties props = new Properties();
 			props.setProperty("hibernate.hbm2ddl.auto", "update");
