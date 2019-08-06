@@ -29,7 +29,7 @@ public class OrmConfiguration {
 			sf.setHibernateProperties(getHibernateProps());
 			return sf;
 			
-		}
+		} 
 		
 		@Bean
 		public DataSource getDataSource() {
